@@ -1,0 +1,27 @@
+//user input
+extern double lowerPriceRange=0;
+extern double upperPriceRange=10;
+
+// signal string
+string signal = "";
+
+void OnTick()
+  {
+  // nextBuyPrice -> finding new target buy price
+  static double nextBuyPrice;
+  // no position conditional (orderPositions==0)
+  if(OrdersTotal()==0)
+  nextBuyPrice=0;
+  
+  //checkGridSignal call
+  signal=checkGridSignal();
+  
+  //conditions to trigger BUY if Ask>NextBuyPrice   
+  if(Ask>=nextBuyPrice)
+  //check signal value
+  if(signal=="buy")
+    {
+     OrderSend(_Symbol,OP_BUY,0.10,Ask,3,0,)
+    }
+  }
+
